@@ -1,0 +1,23 @@
+<div ng-controller="todoCtrl as vm">
+	<h1>TODO</h1>
+
+	<form name="todoForm" class="col-md-6">
+		<h3>Create A New TODO</h3>
+		<div class="form-group">
+			<label>Title</label>
+			<input class="form-control" type="text" name="title" ng-model="vm.newTodo.title" required/>
+		</div>
+
+		<div class="form-group">
+			<label>Description</label>
+			<input class="form-control" type="text" name="description" ng-model="vm.newTodo.description" required/>
+		</div>
+
+		<button class="btn btn-primary" ng-click="vm.createTodo(vm.newTodo);" ng-disabled="todoForm.$invalid">Create!</button>
+	</form>
+
+	<div class="col-md-6">
+		<h3>TODOs</h3>
+		<todo-item ng-repeat="todoData in vm.todos" todo="todoData" refresh-fn="vm.refreshTodos()"></todo-item>
+	</div>
+</div>

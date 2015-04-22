@@ -2,14 +2,14 @@
 
   'use strict';
 
-    app.config(['$routeProvider',
+    angular.module('app').config(['$routeProvider',
         function($routeProvider) {
           $routeProvider
-            .when('/dashboard', {
-                templateUrl: 'app/dashboard/dashboard.html',
+            .when('/todo', {
+                templateUrl: 'app/todo/todo.html',
             })
             .otherwise({
-                  templateUrl: 'app/dashboard/dashboard.html'
+                  templateUrl: 'app/todo/todo.html'
             });
     }]);
 

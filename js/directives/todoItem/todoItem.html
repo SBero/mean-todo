@@ -1,0 +1,40 @@
+<div class="well">
+	<div ng-show="!editing">
+		<div class="pull-right">
+			<button class="btn btn-info" ng-click="editItem();">
+				<span class="glyphicon glyphicon-pencil"></span>
+			</button>
+			<button class="btn btn-danger" ng-click="deleteItem();">
+				<span class="glyphicon glyphicon-trash"></span>
+			</button>
+		</div>
+		<h4>{{todo.title}}</h4>
+		<p>{{todo.description}}</p>
+	</div>
+
+	<div ng-show="editing">
+		<form name="todoItemForm">
+			<div class="form-group">
+				<label>Title</label>
+				<input type="text" class="form-control" name="title" ng-model="todo.title" required>
+			</div>
+
+			<div class="form-group">
+				<label>Description</label>
+				<input type="text" class="form-control" name="description" ng-model="todo.description" required>
+			</div>
+
+			<div class="pull-right">
+				<button class="btn btn-success" ng-disabled="todoItemForm.$pristine && todoItemForm.$valid" ng-click="updateItem();">
+					<span class="glyphicon glyphicon-floppy-disk"></span> Save
+				</button>
+
+				<button class="btn btn-danger" ng-click="cancelUpdate();">
+					<span class="glyphicon glyphicon-floppy-disk"></span> Cancel
+				</button>
+			</div>
+
+			<div class="clearfix"></div>
+		</form>
+	</div>
+</div>

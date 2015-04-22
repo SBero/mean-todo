@@ -53,7 +53,9 @@ module.exports.controller = function(app, db) {
 	 * @return {[type]}                                 [description]
 	 */
 	app.post(resource, function(req, res){
-		todos.insert({title: 'Test', description: 'Another TODO!'}, function(err, doc){
+		var todo = req.body;
+
+		todos.insert(todo, function(err, doc){
 			if(err) throw err;
 
 			return res.json({message: "Successfully created a new TODO.", todo: doc});
