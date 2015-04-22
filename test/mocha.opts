@@ -1,0 +1,2 @@
+--watch test/unit/**/*.js
+--reporter dot
