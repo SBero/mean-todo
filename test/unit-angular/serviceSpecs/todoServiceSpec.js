@@ -26,5 +26,32 @@ describe('Unit: Services', function(){
 
 			// $httpBackend with throw an error automatically if there is a request issue		
 		});
+
+		it('should get one todo', function(){
+			$httpBackend.expectGET(baseUrl + '/todo/1')
+			.respond(200, 'todo API');
+
+			todoService.get(1);
+
+			$httpBackend.flush();
+		});
+
+		it('should update a todo item', function(){
+			$httpBackend.expectPUT(baseUrl + '/todo')
+			.respond(200, 'todo API');
+
+			todoService.update({title: 'My Todo', description: 'Another Todo Update.'});
+
+			$httpBackend.flush();
+		});
+
+		it('should delete a todo item', function(){
+			$httpBackend.expectDELETE(baseUrl + '/todo/1')
+			.respond(200, 'todo API');
+
+			todoService.delete(1);
+
+			$httpBackend.flush();
+		});
 	});
 });
