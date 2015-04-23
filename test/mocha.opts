@@ -1,2 +1,2 @@
---watch test/unit/**/*.js
+--watch test/unit-express/**/*.js
 --reporter dot

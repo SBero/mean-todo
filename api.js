@@ -4,6 +4,7 @@ var assert = require('assert');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var app = module.exports = express();
+var path = require('path');
 
 // var db_url = "mongodb://localhost:27017/mean_todo";
 
@@ -12,6 +13,7 @@ var db = require('monk')('localhost/mean_todo');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
