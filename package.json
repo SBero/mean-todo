@@ -18,6 +18,8 @@
   },
   "devDependencies": {
     "chai": "^2.2.0",
+    "gulp": "^3.8.11",
+    "istanbul": "^0.3.13",
     "karma": "^0.12.31",
     "karma-coverage": "^0.3.1",
     "karma-mocha-reporter": "^1.0.2",

@@ -61,7 +61,7 @@ module.exports = function(config) {
     coverageReporter: {
         type: 'html',
         dir: 'coverage/',
-        subdir: 'report-html'
+        subdir: 'angular'
     },
 
     // web server port

@@ -35,12 +35,36 @@ describe('Unit: todoController', function(){
 	});
 
 	describe(" READ ", function(){
+		var todo = undefined;
+
+		before(function(done){
+			request(app)
+				.post(resource)
+				.send({title: "Todo Title", description: "Todo Description"})
+				.end(function(err, res){
+					expect(res.statusCode).to.equal(200)
+					expect(res.body.todo).to.exist;
+					todo = res.body.todo;
+					done();
+				})
+		});
+
+		after(function(done){
+			request(app)
+				.delete(resource + "/" + todo._id)
+				.end(function(err, res){
+					expect(res.statusCode).to.equal(200);
+					done();
+				});
+		});
+
 		it("gets all of the available todo items 200 ok on success", function(done){
 			request(app)
 				.get(resource)
 				.end(function(err, res){
 					expect(res.statusCode).to.equal(200);
 					expect(res.body.todos).to.exist;
+					todo = res.body.todos[0];
 					done();
 				});
 		});
@@ -48,6 +72,28 @@ describe('Unit: todoController', function(){
 		it("gets a todo item that doesn't exist 400 on error", function(done){
 			request(app)
 				.get(resource + "/0")
+				.end(function(err, res){
+					expect(res.statusCode).to.equal(400);
+					done();
+				});
+		});
+
+		it('gets a todo item and returns 200 ok on success', function(done){
+			request(app)
+				.get(resource + "/" + todo._id)
+				.end(function(err, res){
+					expect(res.statusCode).to.equal(200);
+					expect(res.body.todo).to.exist;
+					done();
+				});
+		});
+
+		it('gets a todo item thats long enough, but invalid returns 400 on error', function(done){
+			var todoId = todo._id.substr(0, todo._id.length-1);
+			todoId += "0";
+			
+			request(app)
+				.get(resource + "/" + todoId)
 				.end(function(err, res){
 					expect(res.statusCode).to.equal(400);
 					done();
@@ -114,6 +160,29 @@ describe('Unit: todoController', function(){
 				.delete(resource + "/" + todo._id)
 				.end(function(err, res){
 					expect(res.statusCode).to.equal(200);
+					done();
+				});
+		});
+
+		it("deletes a todo item that doesn't have a long enough id with 400 on error", function(done){
+			var todoId = "1234";
+
+			request(app)
+				.delete(resource + "/" + todoId)
+				.end(function(err, res){
+					expect(res.statusCode).to.equal(400);
+					done();
+				});
+		});
+
+		it("deletes a todo item that doesn't exist with 400 on error", function(done){
+			var todoId = todo._id.substr(0, todo._id.length-1);
+			todoId += "0";
+
+			request(app)
+				.delete(resource + "/" + todoId)
+				.end(function(err, res){
+					expect(res.statusCode).to.equal(400);
 					done();
 				});
 		});

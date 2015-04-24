@@ -16,12 +16,18 @@ module.exports.controller = function(app, db) {
 
 		var byteLength = Buffer.byteLength(todo_id, 'utf8');
 
-		if(byteLength < 12){
+		if(byteLength !== 24){
 			return res.status(400).send({message: 'Invalid todo id supplied. Please try again.'});
 		}
 		
 		todos.findById(todo_id, function(err, doc){
-			if(err) throw err;
+			if(err){
+				return res.status(500).send({error: "Invalid todo id supplied."});
+			}
+
+			if(doc === null){
+				return res.status(400).send({message: "No valid todo found with that id."});
+			}
 
 			return res.json({message: "Successfully retrieved a TODO.", todo: doc});
 		});
@@ -96,12 +102,16 @@ module.exports.controller = function(app, db) {
 
 		var byteLength = Buffer.byteLength(todo_id, 'utf8');
 
-		if(byteLength < 12){
+		if(byteLength !== 24){
 			return res.status(400).send({message: 'Invalid todo id supplied. Please try again.'});
 		}
 
 		todos.findById(todo_id, function(err, doc){
 			if(err) throw err;
+
+			if(doc === null){
+				return res.status(400).send({message: "No valid todo found with that id."});
+			}
 
 			todos.remove(doc, function(err){
 				if(err) throw err;

@@ -13,13 +13,15 @@ Once you have those items installed on your system, just clone the repository in
 npm install
 ```
 
-Once this is complete, from the project folder run:
+Once this is complete, you'll probably want to fire up the api. From the projects root folder run:
 
 ```javascript
 node api.js
 ```
 
-This will fireup the server and allow you to connect to http://localhost:3000 from your favorite browser to view the demo.
+Now navigate to http://localhost:3000 from your favorite browser to view the demo.
+
+## Node / Express Unit Tests
 
 To run the node unit tests, run:
 
@@ -27,11 +29,26 @@ To run the node unit tests, run:
 mocha
 ```
 
-To run the angular unit tests, run:
+To run the node unit tests and generate code coverage reports, run from the project root:
+```javascript
+istanbul cover _mocha
+```
+
+You have to actually quit the code runner that's built into mocha, in order to have the reports generated to view.
+
+To view them, navigate to: http://localhost:3000/coverage/node/lcov-report/
+
+## Angular Unit Tests
+
+To run the angular unit tests (which also automatically generates code coverage reports), run:
 
 ```javascript
 karma
 ```
+
+To view the code coverage reports, navigate to: http://localhost:3000/coverage/angular/
+
+## Angular End-to-End Tests
 
 To run the angular end-to-end tests, run:
 
