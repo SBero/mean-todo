@@ -30,6 +30,12 @@
 				function(success){
 					vm.todos = success.data.todos;
 					console.log(vm.todos);
+
+					for(var i = 0; i < vm.todos.length; ++i){
+						var todo = vm.todos[i];
+
+						// do stuff
+					}
 				},
 				function(error){
 

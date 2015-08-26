@@ -40,8 +40,6 @@ describe('Unit: Directives', function(){
 		
 		it('should have a title and description', function(){
 			elem = $compile(directiveStr)(scope);
-		
-			
 
 			scope.$digest();
 
@@ -52,13 +50,7 @@ describe('Unit: Directives', function(){
 		});
 
 		it('should execute the refreshFn scope function', function(){
-			
-
 			elem = $compile(directiveStr)(scope);
-
-			console.log(scope.refreshFn());
-
-			
 
 			scope.$digest();
 

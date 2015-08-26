@@ -6,8 +6,6 @@ var bodyParser = require('body-parser');
 var app = module.exports = express();
 var path = require('path');
 
-// var db_url = "mongodb://localhost:27017/mean_todo";
-
 var db = require('monk')('localhost/mean_todo');
 
 
@@ -26,23 +24,6 @@ app.use(function(req, res, next) {
 var server = app.listen(3000);
 
 var io = require('socket.io')(server);
-/*
-// Verify the db application is successful
-mongo_client.connect(db_url, function(err, db) {
-	assert.equal(null, err);
-	console.log("Connected correctly to server.");
-	
-	db.close();
-
-  	
-
-
-
-	
-
-	// require('./sockets.js')(app, io, forge);
-
-});*/
 
 // Auto load all controllers for the application
 fs.readdirSync('./api/controllers').forEach(function (file){

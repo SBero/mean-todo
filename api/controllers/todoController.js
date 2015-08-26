@@ -21,9 +21,9 @@ module.exports.controller = function(app, db) {
 		}
 		
 		todos.findById(todo_id, function(err, doc){
-			if(err){
-				return res.status(500).send({error: "Invalid todo id supplied."});
-			}
+			// if(err){
+				// return res.status(500).send({error: "Invalid todo id supplied."});
+			// }
 
 			if(doc === null){
 				return res.status(400).send({message: "No valid todo found with that id."});
@@ -62,7 +62,7 @@ module.exports.controller = function(app, db) {
 		var todo = req.body;
 
 		todos.insert(todo, function(err, doc){
-			if(err) throw err;
+			// if(err) throw err;
 
 			return res.json({message: "Successfully created a new TODO.", todo: doc});
 		});
@@ -82,7 +82,7 @@ module.exports.controller = function(app, db) {
 		var todo = req.body;
 		
 		todos.updateById(todo._id, todo, function(err, doc){
-			if(err) throw err;
+			// if(err) throw err;
 
 			return res.json({message: "Successfully updated a TODO.", todo: todo});
 		});
@@ -107,14 +107,14 @@ module.exports.controller = function(app, db) {
 		}
 
 		todos.findById(todo_id, function(err, doc){
-			if(err) throw err;
+			// if(err) throw err;
 
 			if(doc === null){
 				return res.status(400).send({message: "No valid todo found with that id."});
 			}
 
 			todos.remove(doc, function(err){
-				if(err) throw err;
+				// if(err) throw err;
 
 				
 				return res.json({message: "Successfully delete a TODO."});
