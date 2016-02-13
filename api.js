@@ -8,6 +8,8 @@ var path = require('path');
 
 var db = require('monk')('localhost/mean_todo');
 
+//get server params
+var serverParams = require('./config/serverConfig.js');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -21,7 +23,7 @@ app.use(function(req, res, next) {
 });
 
 
-var server = app.listen(3000);
+var server = app.listen(serverParams.port);
 
 var io = require('socket.io')(server);
 
