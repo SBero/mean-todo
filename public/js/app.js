@@ -15,6 +15,7 @@ fetchData().then(bootstrapApplication);
 
 //fetchData sets up a constant, CONFIG, which is visible across the angular app
 
+
 function fetchData() {
     var initInjector = angular.injector(["ng"]);
     var $http = initInjector.get("$http");

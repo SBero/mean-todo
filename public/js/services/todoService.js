@@ -3,10 +3,12 @@
 
     var serviceId = "todoService";
 
-    angular.module('app.services').factory(serviceId, ['$http', todoService]);
+    angular.module('app.services').factory(serviceId, ['CONFIG', '$http', todoService]);
 
-    function todoService($http) {
-        var resource = "http://localhost:8080/todo";
+    function todoService(CONFIG, $http) {
+        var port = CONFIG.port;
+        var host = CONFIG.host;
+        var resource = "http://" + host + ":" + port + "/todo";
 
         return {
             get: function (id) {
