@@ -28,6 +28,7 @@
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "mocha": "^2.2.4",
     "supertest": "^0.15.0",
-    "gulp-karma": "^0.0.4"
+    "gulp-karma": "^0.0.4",
+    "config.json": "latest"
   }
 }

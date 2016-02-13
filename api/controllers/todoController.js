@@ -3,6 +3,24 @@ module.exports.controller = function(app, db) {
 	var todos = db.get('todos');
 
 	/**
+	 * GET /todo/config
+	 *
+	 * Retrieve config values for the app (front and back)
+	 *
+	 * @param  {[type]} req         [description]
+	 * @param  {[type]} res){		var todo_id       [description]
+	 * @return {[type]}             [description]
+	 */
+	app.get(resource + "/config", function (req, res) {
+
+		console.log("in config service");
+		//config is on the serverParams object
+		var params = app.get('serverParams');
+		return res.json(params);
+
+	});
+
+	/**
 	 * GET /todo/:todo_id
 	 *
 	 * Retrieves a todo item based on its id.

@@ -6,10 +6,19 @@ var bodyParser = require('body-parser');
 var app = module.exports = express();
 var path = require('path');
 
-var db = require('monk')('localhost/mean_todo');
+//Database for todos
+var monk = require('monk');
+var db = monk('localhost/mean_todo');
 
-//get server params
-var serverParams = require('./config/serverConfig.js');
+/*
+ Use config.json to get app params; this will also be used
+ as an API to provide config to frontend (only interested in server params right now,
+ even though config.json reads the environment also )
+
+ */
+var serverParams = require('config.json')('./config/serverConfig.json');
+app.set('serverParams', serverParams.server);
+
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -23,7 +32,7 @@ app.use(function(req, res, next) {
 });
 
 
-var server = app.listen(serverParams.port);
+var server = app.listen(serverParams.server.port);
 
 var io = require('socket.io')(server);
 
