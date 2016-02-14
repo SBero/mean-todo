@@ -1,38 +1,40 @@
 (function(){
-	'use strict';
+    'use strict';
 
-	var serviceId = "todoService";
+    var serviceId = "todoService";
 
-	angular.module('app.services').factory(serviceId, ['$http', todoService]);
+    angular.module('app.services').factory(serviceId, ['CONFIG', '$http', todoService]);
 
-	function todoService($http){
-		var resource = "http://localhost:3000/todo";
+    function todoService(CONFIG, $http) {
+        var port = CONFIG.port;
+        var host = CONFIG.host;
+        var resource = "http://" + host + ":" + port + "/todo";
 
-		return {
-			get: function(id){
-				var url = resource;
+        return {
+            get: function (id) {
+                var url = resource;
 
-				if(typeof id !== 'undefined'){
-					url += "/" + id;
-				}
+                if (typeof id !== 'undefined') {
+                    url += "/" + id;
+                }
 
-				return $http.get(url);
-			},
-			create: function(todo){
-				return $http.post(resource, todo);
-			},
-			update: function(todo){
-				// var id = todo._id;
+                return $http.get(url);
+            },
+            create: function (todo) {
+                return $http.post(resource, todo);
+            },
+            update: function (todo) {
+                // var id = todo._id;
 
-				var url = resource;
+                var url = resource;
 
-				return $http.put(url, todo);
-			},
-			delete: function(id){
-				var url = resource + "/" + id;
+                return $http.put(url, todo);
+            },
+            delete: function (id) {
+                var url = resource + "/" + id;
 
-				return $http.delete(url);
-			}
-		}
-	}
+                return $http.delete(url);
+            }
+        }
+    }
 }());
